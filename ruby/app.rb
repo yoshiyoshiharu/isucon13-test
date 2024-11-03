@@ -469,8 +469,12 @@ module Isupipe
     get '/api/livestream/:livestream_id/livecomment' do
       verify_user_session!
       livestream_id = cast_as_integer(params[:livestream_id])
+      livecomment_models = []
 
       livecomments = db_transaction do |tx|
+        livestream_model = tx.xquery('SELECT * FROM livestreams WHERE id = ?', livestream_id).first
+        livestream = fill_livestream_response(tx, livestream_model)
+
         query = 'SELECT * FROM livecomments WHERE livestream_id = ? ORDER BY created_at DESC'
         limit_str = params[:limit] || ''
         if limit_str != ''
@@ -478,9 +482,16 @@ module Isupipe
           query = "#{query} LIMIT #{limit}"
         end
 
-        tx.xquery(query, livestream_id).map do |livecomment_model|
-          fill_livecomment_response(tx, livecomment_model)
-        end
+        livecomment_models = tx.xquery(query, livestream_id)
+        livecomment_models.map do |livecomment_model|
+          comment_owner_model = tx.xquery('SELECT * FROM users WHERE id = ?', livecomment_model.fetch(:user_id)).first
+          comment_owner = fill_user_response(tx, comment_owner_model)
+
+          livecomment_model.slice(:id, :comment, :tip, :created_at).merge(
+            user: comment_owner,
+            livestream:,
+          )
+          end
       end
 
       json(livecomments)
