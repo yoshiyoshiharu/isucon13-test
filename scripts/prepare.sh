@@ -6,6 +6,9 @@ mysql_slow_log="/var/log/mysql/mysql-slow.log"
 nginx_access_log="/var/log/nginx/access.log"
 systemctl_app="isupipe-ruby.service"
 
+# 最新状態にする
+git pull
+
 # ログをクリア
 sudo truncate -s 0 "${mysql_slow_log}"
 sudo truncate -s 0 "${nginx_access_log}"
