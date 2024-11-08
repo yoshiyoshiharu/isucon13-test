@@ -332,9 +332,8 @@ module Isupipe
           if key_tag_name != ''
             # タグによる取得
             tag_id_list = tx.xquery('SELECT id FROM tags WHERE name = ?', key_tag_name, as: :array).map(&:first)
-            tx.xquery('SELECT * FROM livestream_tags WHERE tag_id IN (?) ORDER BY livestream_id DESC', tag_id_list).map do |key_tagged_livestream|
-              tx.xquery('SELECT * FROM livestreams WHERE id = ?', key_tagged_livestream.fetch(:livestream_id)).first
-            end
+            key_tagged_livestreams = tx.xquery('SELECT * FROM livestream_tags WHERE tag_id IN (?) ORDER BY livestream_id DESC', tag_id_list)
+            tx.xquery('SELECT * FROM livestreams WHERE id IN (?)', key_tagged_livestream.map { |ktl| ktl.fetch(:id) })
           else
             # 検索条件なし
             query = 'SELECT * FROM livestreams ORDER BY id DESC'
@@ -343,14 +342,52 @@ module Isupipe
               limit = cast_as_integer(limit_str)
               query = "#{query} LIMIT #{limit}"
             end
-
             tx.xquery(query).to_a
           end
 
+        # user_idの一覧を取得してowners情報を一括取得
+        # user_idをキーにしたハッシュを作成
+        user_ids = livestream_models.map { |livestream| livestream.fetch(:user_id) }.uniq
+        owners = tx.xquery('SELECT * FROM users WHERE id IN (?)', user_ids).map do |owner_model|
+          [user_model.fetch(:id), fill_user_response(tx, owner_model)]
+        end.to_h
+          
+        # livestream_idsの一覧を取得してlivestream_tag_models情報を一括取得
+        livestream_ids = livestream_models.map { |model| model.fetch(:id) }
+        livestream_tag_models = tx.xquery('SELECT * FROM livestream_tags WHERE livestream_id IN (?)', livestream_ids)
+
+        # livestream_tagsは中間テーブルなので、group_byを使う必要ある（1:多なので)
+        # 以下のように出力される
+        # {
+        #   livestream_id: [{ livestream_tag_model1 }, { livestream_tag_model2 }, { livestream_tag_model3}]
+        # }
+        livestream_tag_models_by_livestream_id = livestream_tag_models.group_by do |livestream_tag_model|
+          livestream_tag_model.fetch(:livestream_id)
+        end
+
+        # livestream_tag_idsの一覧を取得してtag_models情報を一括取得
+        # tag_idをキーにしたハッシュを作成
+        livestream_tag_ids = livestream_tag_models.map{ |livestream_tag| livestream_tag.fetch(:tag_id) }.uniq
+        tag_models = tx.xquery('SELECT * FROM tags WHERE id IN (?)', livestream_tag_ids).map do |tag_model|
+          [tag_model.fetch(:id), { id: tag_model.fetch(:id), name: tag_model.fetch(:name) }]
+        end.to_h
+
         livestream_models.map do |livestream_model|
-          fill_livestream_response(tx, livestream_model)
+          # Hashから取得
+          owner = owners[livestream_model.fetch(:user_id)]
+
+          # Hashから取得
+          tags = livestream_tag_models_by_livestream_id(livestream_model.fetch(:id)).map do |livestream_tag_model|
+            tag_models[livestream_tag_model.fetch(:tag_id)]
+          end
+
+          livestream_model.slice(:id, :title, :description, :playlist_url, :thumbnail_url, :start_at, :end_at).merge(
+            owner: owner,
+            tags: tags,
+          )
         end
       end
+
 
       json(livestreams)
     end
