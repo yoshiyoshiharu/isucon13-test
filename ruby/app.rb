@@ -349,7 +349,7 @@ module Isupipe
         # user_idをキーにしたハッシュを作成
         user_ids = livestream_models.map { |livestream| livestream.fetch(:user_id) }.uniq
         owners = tx.xquery('SELECT * FROM users WHERE id IN (?)', user_ids).map do |owner_model|
-          [user_model.fetch(:id), fill_user_response(tx, owner_model)]
+          [owner_model.fetch(:id), fill_user_response(tx, owner_model)]
         end.to_h
           
         # livestream_idsの一覧を取得してlivestream_tag_models情報を一括取得
