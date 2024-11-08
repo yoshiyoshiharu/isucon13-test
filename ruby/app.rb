@@ -706,13 +706,13 @@ module Isupipe
         livestream = api_livestream_livestream_id_reaction_fill_livestream_response(tx, livestream_model)
 
         # 2. reactionsを一括で取得
-        query = 'SELECT * FROM reactions WHERE livestream_id = ? ORDER BY created_at DESC'
+        query = 'SELECT id, emoji_name, created_at, user_id FROM reactions WHERE livestream_id = ? ORDER BY created_at DESC'
         limit_str = params[:limit] || ''
         if limit_str != ''
           limit = cast_as_integer(limit_str)
           query = "#{query} LIMIT #{limit}"
         end
-        reaction_model = tx.xquery(query, livestream_id)
+        reaction_models = tx.xquery(query, livestream_id)
 
         # 3. user_idの一覧を取得してユーザー情報を一括取得
         user_ids = (reaction_models.map { |reaction| reaction.fetch(:user_id) } + [livestream_model.fetch(:user_id)]).uniq
