@@ -727,7 +727,7 @@ module Isupipe
     end
 
     def api_livestream_livestream_id_reaction_fill_user_response(tx, user_model)
-      theme_model = tx.xquery('SELECT id, name, display_name, description FROM themes WHERE user_id = ?', user_model.fetch(:id)).first
+      theme_model = tx.xquery('SELECT id, dark_mode FROM themes WHERE user_id = ?', user_model.fetch(:id)).first
 
       icon_model = tx.xquery('SELECT image FROM icons WHERE user_id = ?', user_model.fetch(:id)).first
       image =
