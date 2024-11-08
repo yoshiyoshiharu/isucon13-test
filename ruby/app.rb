@@ -333,7 +333,7 @@ module Isupipe
             # タグによる取得
             tag_id_list = tx.xquery('SELECT id FROM tags WHERE name = ?', key_tag_name, as: :array).map(&:first)
             key_tagged_livestreams = tx.xquery('SELECT * FROM livestream_tags WHERE tag_id IN (?) ORDER BY livestream_id DESC', tag_id_list)
-            tx.xquery('SELECT * FROM livestreams WHERE id IN (?)', key_tagged_livestreams.map { |ktl| ktl.fetch(:id) })
+            tx.xquery('SELECT * FROM livestreams WHERE id IN (?)', key_tagged_livestreams.map { |ktl| ktl.fetch(:livestream_id) })
           else
             # 検索条件なし
             query = 'SELECT * FROM livestreams ORDER BY id DESC'
@@ -342,6 +342,7 @@ module Isupipe
               limit = cast_as_integer(limit_str)
               query = "#{query} LIMIT #{limit}"
             end
+
             tx.xquery(query).to_a
           end
 
