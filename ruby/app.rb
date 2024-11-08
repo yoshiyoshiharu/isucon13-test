@@ -377,7 +377,7 @@ module Isupipe
           owner = owners[livestream_model.fetch(:user_id)]
 
           # Hashから取得
-          tags = livestream_tag_models_by_livestream_id[livestream_model.fetch(:id)].map do |livestream_tag_model|
+          tags = livestream_tag_models_by_livestream_id[livestream_model.fetch(:id)].to_a.map do |livestream_tag_model|
             tag_models[livestream_tag_model.fetch(:tag_id)]
           end
 
