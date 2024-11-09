@@ -183,7 +183,25 @@ module Isupipe
           icon_hash:,
         }
       end
+
+      def fill_user_response_for_register(tx, user_model, theme_model)
+        image = File.binread(FALLBACK_IMAGE)
+        icon_hash = Digest::SHA256.hexdigest(image)
+
+        {
+          id: user_model.fetch(:id),
+          name: user_model.fetch(:name),
+          display_name: user_model.fetch(:display_name),
+          description: user_model.fetch(:description),
+          theme: {
+            id: theme_model.fetch(:id),
+            dark_mode: theme_model.fetch(:dark_mode),
+          },
+          icon_hash:,
+        }
+      end
     end
+
 
     # 初期化
     post '/api/initialize' do
@@ -830,18 +848,24 @@ module Isupipe
         user_id = tx.last_id
 
         tx.xquery('INSERT INTO themes (user_id, dark_mode) VALUES(?, ?)', user_id, req.theme.fetch(:dark_mode))
+        theme_model = {
+          id: tx.last_id,
+          dark_mode: req.theme.fetch(:dark_mode),
+        }
 
         out, status = Open3.capture2e('pdnsutil', 'add-record', 'u.isucon.local', req.name, 'A', '0', POWERDNS_SUBDOMAIN_ADDRESS)
         unless status.success?
           raise HttpError.new(500, "pdnsutil failed with out=#{out}")
         end
 
-        fill_user_response(tx, {
+        user_model = {
           id: user_id,
           name: req.name,
           display_name: req.display_name,
           description: req.description,
-        })
+        }
+
+        fill_user_response_for_register(tx, user_model, theme_model)
       end
 
       status 201
