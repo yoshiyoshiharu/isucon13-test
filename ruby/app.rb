@@ -198,7 +198,7 @@ module Isupipe
       end
 
       def tag_master
-        %w(
+        @tag_master ||= %w(
           ライブ配信
           ゲーム実況
           生放送
