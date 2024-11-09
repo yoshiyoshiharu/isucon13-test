@@ -825,7 +825,7 @@ module Isupipe
         raise HttpError.new(404, 'not found user that has the given username')
       end
 
-      icon_url = "/api/user/#{user.fetch(:name)}/icon.jpg"
+      icon_url = "/api/user/#{user.fetch(:name)}/icon"
 
       content_type 'image/jpeg'
       send_file icon_url
@@ -852,6 +852,7 @@ module Isupipe
       end
       FileUtils.mkdir_p("../img/#{user_name}/")
       File.open("../img/#{user_name}/icon.jpg", mode="w") do |f|
+        puts "#{__FILE__}"
         f.write(image)
       end
 
