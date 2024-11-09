@@ -501,10 +501,13 @@ module Isupipe
         end
 
         livecomment_models = tx.xquery(query, livestream_id)
+
+        return [] if livecomment_models.empty?
+
         logger.info("livecomment_models: #{livecomment_models}")
         comment_owner_model_ids = livecomment_models.map { |livecomment_model| livecomment_model.fetch(:user_id) }.uniq
         logger.info("comment_owner_model_ids: #{comment_owner_model_ids}")
-        comment_owner_models = tx.xquery('SELECT * FROM users WHERE id IN (?)', comment_owner_model_ids.presence || [-1])
+        comment_owner_models = tx.xquery('SELECT * FROM users WHERE id IN (?)', comment_owner_model_ids)
 
         livecomment_models.map do |livecomment_model|
           comment_owner_model = comment_owner_models.find { |user| user.fetch(:id) == livecomment_model.fetch(:user_id) }
