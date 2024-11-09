@@ -701,6 +701,8 @@ module Isupipe
       livestream_id = cast_as_integer(params[:livestream_id])
 
       reactions = db_transaction do |tx|
+        livestream_model = tx.xquery('SELECT * FROM livestreams WHERE id = ?', params[:livestream_id]).first
+
         query = 'SELECT * FROM reactions WHERE livestream_id = ? ORDER BY created_at DESC'
         limit_str = params[:limit] || ''
         if limit_str != ''
@@ -709,11 +711,69 @@ module Isupipe
         end
 
         tx.xquery(query, livestream_id).map do |reaction_model|
-          fill_reaction_response(tx, reaction_model)
+          user_model = tx.xquery('SELECT * FROM users WHERE id = ?', reaction_model.fetch(:user_id)).first
+          user = api_livestream_livestream_id_reaction_fill_user_response(tx, user_model)
+
+          livestream = api_livestream_livestream_id_reaction_fill_livestream_response(tx, livestream_model)
+
+          reaction_model.slice(:id, :emoji_name, :created_at).merge(
+            user:,
+            livestream:,
+          )
         end
       end
 
       json(reactions)
+    end
+
+    def api_livestream_livestream_id_reaction_fill_user_response(tx, user_model)
+      theme_model = tx.xquery('SELECT id, dark_mode FROM themes WHERE user_id = ?', user_model.fetch(:id)).first
+
+      icon_model = tx.xquery('SELECT image FROM icons WHERE user_id = ?', user_model.fetch(:id)).first
+      image =
+        if icon_model
+          icon_model.fetch(:image)
+        else
+          File.binread(FALLBACK_IMAGE)
+        end
+      icon_hash = Digest::SHA256.hexdigest(image)
+
+      {
+        id: user_model.fetch(:id),
+        name: user_model.fetch(:name),
+        display_name: user_model.fetch(:display_name),
+        description: user_model.fetch(:description),
+        theme: {
+          id: theme_model.fetch(:id),
+          dark_mode: theme_model.fetch(:dark_mode),
+        },
+        icon_hash:,
+      }
+    end
+
+    def api_livestream_livestream_id_reaction_fill_livestream_response(tx, livestream_model)
+      owner_model = tx.xquery('SELECT * FROM users WHERE id = ?', livestream_model.fetch(:user_id)).first
+      owner = fill_user_response(tx, owner_model)
+
+      # 1. すべての関連するタグIDを1回のクエリで取得
+      tag_ids = tx.xquery('SELECT tag_id FROM livestream_tags WHERE livestream_id = ?', livestream_model.fetch(:id)).map { |row| row[:tag_id] }
+      # 2. 取得したタグIDを用いて、該当するタグを一度に取得
+      tags =
+        if tag_ids.any?
+          tx.xquery('SELECT * FROM tags WHERE id IN (?)', tag_ids).map do |tag_model|
+            {
+              id: tag_model.fetch(:id),
+              name: tag_model.fetch(:name),
+            }
+          end
+        else
+          []
+        end
+
+      livestream_model.slice(:id, :title, :description, :playlist_url, :thumbnail_url, :start_at, :end_at).merge(
+        owner:,
+        tags:,
+      )
     end
 
     PostReactionRequest = Data.define(:emoji_name)
