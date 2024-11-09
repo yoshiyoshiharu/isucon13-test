@@ -701,24 +701,31 @@ module Isupipe
       livestream_id = cast_as_integer(params[:livestream_id])
 
       reactions = db_transaction do |tx|
+        # 1. livestream_modelを一度だけ取得してキャッシュ
         livestream_model = tx.xquery('SELECT * FROM livestreams WHERE id = ?', params[:livestream_id]).first
+        livestream = api_livestream_livestream_id_reaction_fill_livestream_response(tx, livestream_model)
 
-        query = 'SELECT * FROM reactions WHERE livestream_id = ? ORDER BY created_at DESC'
+        # 2. reactionsを一括で取得
+        query = 'SELECT id, emoji_name, created_at, user_id FROM reactions WHERE livestream_id = ? ORDER BY created_at DESC'
         limit_str = params[:limit] || ''
         if limit_str != ''
           limit = cast_as_integer(limit_str)
           query = "#{query} LIMIT #{limit}"
         end
+        reaction_models = tx.xquery(query, livestream_id)
 
-        tx.xquery(query, livestream_id).map do |reaction_model|
-          user_model = tx.xquery('SELECT * FROM users WHERE id = ?', reaction_model.fetch(:user_id)).first
-          user = api_livestream_livestream_id_reaction_fill_user_response(tx, user_model)
+        # 3. user_idの一覧を取得してユーザー情報を一括取得
+        user_ids = (reaction_models.map { |reaction| reaction.fetch(:user_id) } + [livestream_model.fetch(:user_id)]).uniq
+        users = tx.xquery('SELECT * FROM users WHERE id IN (?)', user_ids).map do |user_model|
+          [user_model.fetch(:id), api_livestream_livestream_id_reaction_fill_user_response(tx, user_model)]
+        end.to_h
 
-          livestream = api_livestream_livestream_id_reaction_fill_livestream_response(tx, livestream_model)
-
+        # 4. reactionsのマッピング
+        reaction_models.map do |reaction_model|
+          user = users[reaction_model.fetch(:user_id)]
           reaction_model.slice(:id, :emoji_name, :created_at).merge(
-            user:,
-            livestream:,
+            user: user,
+            livestream: livestream
           )
         end
       end
