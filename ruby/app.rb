@@ -436,7 +436,7 @@ module Isupipe
             #   tx.xquery('SELECT * FROM livestreams WHERE id = ?', key_tagged_livestream.fetch(:livestream_id)).first
             # end
             # JOINを用いて書き直す
-            tx.xquery('SELECT * FROM livestreams AS l LEFT JOIN livestream_tags AS lt ON l.id = lt.livestream_id WHERE lt.tag_id IN (?) ORDER BY l.id DESC', tag_id_list)
+            tx.xquery('SELECT DISTINCT l.* FROM livestreams AS l LEFT JOIN livestream_tags AS lt ON l.id = lt.livestream_id WHERE lt.tag_id IN (?) ORDER BY l.id DESC', tag_id_list)
           else
             # 検索条件なし
             query = 'SELECT * FROM livestreams ORDER BY id DESC'
