@@ -107,11 +107,7 @@ module Isupipe
         owner = fill_user_response(tx, owner_model)
 
         tags = tx.xquery('SELECT * FROM livestream_tags WHERE livestream_id = ?', livestream_model.fetch(:id)).map do |livestream_tag_model|
-          tag_model = tx.xquery('SELECT * FROM tags WHERE id = ?', livestream_tag_model.fetch(:tag_id)).first
-          {
-            id: tag_model.fetch(:id),
-            name: tag_model.fetch(:name),
-          }
+        tag_master.find { |tag| tag[:id] == livestream_tag_model.fetch(:tag_id) }
         end
 
         livestream_model.slice(:id, :title, :description, :playlist_url, :thumbnail_url, :start_at, :end_at).merge(
@@ -200,6 +196,119 @@ module Isupipe
           icon_hash:,
         }
       end
+
+      def tag_master
+        @tag_master ||= %w(
+          ライブ配信
+          ゲーム実況
+          生放送
+          アドバイス
+          初心者歓迎
+          プロゲーマー
+          新作ゲーム
+          レトロゲーム
+          RPG
+          FPS
+          アクションゲーム
+          対戦ゲーム
+          マルチプレイ
+          シングルプレイ
+          ゲーム解説
+          ホラーゲーム
+          イベント生放送
+          新情報発表
+          Q&Aセッション
+          チャット交流
+          視聴者参加
+          音楽ライブ
+          カバーソング
+          オリジナル楽曲
+          アコースティック
+          歌配信
+          楽器演奏
+          ギター
+          ピアノ
+          バンドセッション
+          DJセット
+          トーク配信
+          朝活
+          夜ふかし
+          日常話
+          趣味の話
+          語学学習
+          お料理配信
+          手料理
+          レシピ紹介
+          アート配信
+          絵描き
+          DIY
+          手芸
+          アニメトーク
+          映画レビュー
+          読書感想
+          ファッション
+          メイク
+          ビューティー
+          健康
+          ワークアウト
+          ヨガ
+          ダンス
+          旅行記
+          アウトドア
+          キャンプ
+          ペットと一緒
+          猫
+          犬
+          釣り
+          ガーデニング
+          テクノロジー
+          ガジェット紹介
+          プログラミング
+          DIY電子工作
+          ニュース解説
+          歴史
+          文化
+          社会問題
+          心理学
+          宇宙
+          科学
+          マジック
+          コメディ
+          スポーツ
+          サッカー
+          野球
+          バスケットボール
+          ライフハック
+          教育
+          子育て
+          ビジネス
+          起業
+          投資
+          仮想通貨
+          株式投資
+          不動産
+          キャリア
+          スピリチュアル
+          占い
+          手相
+          オカルト
+          UFO
+          都市伝説
+          コンサート
+          ファンミーティング
+          コラボ配信
+          記念配信
+          生誕祭
+          周年記念
+          サプライズ
+          椅子
+        ).map.with_index do |name, i|
+          {
+            id: i + 1,
+            name: name,
+          }
+        end
+      end
     end
 
 
@@ -218,17 +327,8 @@ module Isupipe
 
     # top
     get '/api/tag' do
-      tag_models = db_transaction do |tx|
-        tx.query('SELECT * FROM tags')
-      end
-
       json(
-        tags: tag_models.map { |tag_model|
-          {
-            id: tag_model.fetch(:id),
-            name: tag_model.fetch(:name),
-          }
-        },
+        tags: tag_master,
       )
     end
 
@@ -331,7 +431,7 @@ module Isupipe
         livestream_models =
           if key_tag_name != ''
             # タグによる取得
-            tag_id_list = tx.xquery('SELECT id FROM tags WHERE name = ?', key_tag_name, as: :array).map(&:first)
+            tag_id_list = tag_master.select { |tag| tag[:name] == key_tag_name }.map { |tag| tag[:id] }
             tx.xquery('SELECT * FROM livestream_tags WHERE tag_id IN (?) ORDER BY livestream_id DESC', tag_id_list).map do |key_tagged_livestream|
               tx.xquery('SELECT * FROM livestreams WHERE id = ?', key_tagged_livestream.fetch(:livestream_id)).first
             end
@@ -761,12 +861,7 @@ module Isupipe
       # 2. 取得したタグIDを用いて、該当するタグを一度に取得
       tags =
         if tag_ids.any?
-          tx.xquery('SELECT * FROM tags WHERE id IN (?)', tag_ids).map do |tag_model|
-            {
-              id: tag_model.fetch(:id),
-              name: tag_model.fetch(:name),
-            }
-          end
+          tag_master.select { |tag| tag_ids.include?(tag[:id]) }
         else
           []
         end
