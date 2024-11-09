@@ -860,8 +860,8 @@ module Isupipe
       user_name = db_transaction do |tx|
         tx.xquery('SELECT * FROM users WHERE id = ?', user_id).first[:name]
       end
-      FileUtils.mkdir_p("home/isucon/webapp/img/#{user_name}/")
-      File.open("home/isucon/webapp/img/#{user_name}/icon.jpg", mode="w+b") do |f|
+      FileUtils.mkdir_p("/home/isucon/webapp/img/#{user_name}/")
+      File.open("/home/isucon/webapp/img/#{user_name}/icon.jpg", mode="w+b") do |f|
         f.write(image)
       end
 
