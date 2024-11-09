@@ -825,10 +825,20 @@ module Isupipe
         raise HttpError.new(404, 'not found user that has the given username')
       end
 
-      icon_url = "/api/user/#{user.fetch(:name)}/icon"
+      icon_url = "/img/#{user.fetch(:name)}/icon"
+      image =
+          if File.exist?(icon_url)
+            icon_url
+          else
+            nil
+          end
 
       content_type 'image/jpeg'
-      send_file icon_url
+      if image
+        send_file image
+      else
+        send_file FALLBACK_IMAGE
+      end
     end
 
     PostIconRequest = Data.define(:image)
