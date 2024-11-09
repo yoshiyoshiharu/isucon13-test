@@ -6,8 +6,26 @@ MYSQL_SLOW_LOG="/var/log/mysql/slow.log"
 NGINX_ACCESS_LOG="/var/log/nginx/access.log"
 NGINX_ACCESS_LOG_FORMAT="${APP_HOME}/measure/nginx/access.log"
 
+# パスパターンを配列として定義
+ALP_PATTERNS=(
+    "/api/user/.+/icon"
+    "/api/user/.+/theme"
+    "/api/user/.+/statistics"
+    "/api/livestream/.+/statistics"
+    "/api/livestream/\\d+/livecomment"
+    "/api/livestream/\\d+/moderate"
+    "/api/livestream/\\d+/ngwords"
+    "/api/livestream/\\d+/exit"
+    "/api/livestream/\\d+/enter"
+    "/api/livestream/\\d+/livecomment/\\d+/report"
+    "/api/livestream/\\d+/report"
+    "/api/livestream/\\d+/reaction"
+    "/api/livestream/search\?tag=.*"
+)
+
+# 配列をカンマ区切りで連結してALPMに代入
+ALPM=$(IFS=,; echo "${ALP_PATTERNS[*]}")
 ALPSORT=sum
-ALPM="/api/user/.+/icon,/api/user/.+/theme,/api/user/.+/statistics,/api/livestream/.+/statistics,/api/livestream/\d+/livecomment,/api/livestream/\d+/moderate,/api/livestream/\d+/ngwords,/api/livestream/\d+/exit,/api/livestream/\d+/enter,/api/livestream/\d+/livecomment/\d+/report,/api/livestream/\d+/report,/api/livestream/\d+/reaction,/api/livestream/search?tag=.*"
 OUTFORMAT=count,method,uri,min,max,sum,avg,p99
 
 
@@ -17,5 +35,5 @@ echo "Nginxのログフォーマット完了"
 
 
 # mysql
-sudo mysqldumpslow -s t /var/log/mysql/mysql-slow.log > ./webapp/measure/mysql/mysql-slow.log
+sudo mysqldumpslow -s t /var/log/mysql/mysql-slow.log > ${APP_HOME}/measure/mysql/mysql-slow.log
 echo "Mysqlのスロークエリ出力完了"
