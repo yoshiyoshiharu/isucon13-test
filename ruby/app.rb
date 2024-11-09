@@ -502,7 +502,7 @@ module Isupipe
 
         livecomment_models = tx.xquery(query, livestream_id)
 
-        return [] if livecomment_models.empty?
+        return json([]) if livecomment_models.first.nil?
 
         logger.info("livecomment_models: #{livecomment_models}")
         comment_owner_model_ids = livecomment_models.map { |livecomment_model| livecomment_model.fetch(:user_id) }.uniq
