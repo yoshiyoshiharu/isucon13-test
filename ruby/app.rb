@@ -825,7 +825,7 @@ module Isupipe
         raise HttpError.new(404, 'not found user that has the given username')
       end
 
-      icon_url = "/img/#{user.fetch(:name)}/icon.jpg"
+      icon_url = "../img/#{user.fetch(:name)}/icon.jpg"
       image =
           if File.exist?(icon_url)
             icon_url
