@@ -1,28 +1,28 @@
-Count: 8000  Time=0.01s (45s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 9000  Time=0.01s (51s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO users (id, name, display_name, description, password) VALUES (N, 'S', 'S', 'S', 'S')
 
-Count: 28510  Time=0.00s (40s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 35662  Time=0.00s (49s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   COMMIT
 
-Count: 41203  Time=0.00s (33s)  Lock=0.00s (0s)  Rows=1.0 (41203), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 51650  Time=0.00s (38s)  Lock=0.00s (0s)  Rows=1.0 (51650), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT IFNULL(SUM(l2.tip), N) FROM users u
   INNER JOIN livestreams l ON l.user_id = u.id
   INNER JOIN livecomments l2 ON l2.livestream_id = l.id
   WHERE u.id = 'S'
 
-Count: 4080  Time=0.01s (22s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  INSERT INTO themes (user_id, dark_mode) VALUES (N, true)
-
-Count: 3920  Time=0.01s (21s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  INSERT INTO themes (user_id, dark_mode) VALUES (N, false)
-
-Count: 41203  Time=0.00s (21s)  Lock=0.00s (0s)  Rows=1.0 (41203), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 51650  Time=0.00s (25s)  Lock=0.00s (0s)  Rows=1.0 (51650), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT COUNT(*) FROM users u
   INNER JOIN livestreams l ON l.user_id = u.id
   INNER JOIN reactions r ON r.livestream_id = l.id
   WHERE u.id = 'S'
 
-Count: 80529  Time=0.00s (18s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 4590  Time=0.01s (24s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  INSERT INTO themes (user_id, dark_mode) VALUES (N, true)
+
+Count: 4410  Time=0.01s (24s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  INSERT INTO themes (user_id, dark_mode) VALUES (N, false)
+
+Count: 92571  Time=0.00s (20s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   DELETE FROM livecomments
   WHERE
   id = 'S' AND
@@ -34,37 +34,37 @@ Count: 80529  Time=0.00s (18s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec
   (SELECT CONCAT('S', 'S', 'S')	AS pattern) AS patterns
   ON texts.text LIKE patterns.pattern) >= N
 
+Count: 2393  Time=0.01s (17s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  UPDATE reservation_slots SET slot = slot - N WHERE start_at >= 'S' AND end_at <= 'S'
+
 Count: 56069  Time=0.00s (16s)  Lock=0.00s (0s)  Rows=0.8 (44196), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT image FROM icons WHERE user_id = 'S'
 
-Count: 2063  Time=0.01s (15s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  UPDATE reservation_slots SET slot = slot - N WHERE start_at >= 'S' AND end_at <= 'S'
-
-Count: 2068  Time=0.01s (14s)  Lock=0.00s (0s)  Rows=9.6 (19856), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 2399  Time=0.01s (16s)  Lock=0.00s (0s)  Rows=9.6 (23037), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM reservation_slots WHERE start_at >= 'S' AND end_at <= 'S' FOR UPDATE
 
-Count: 111332  Time=0.00s (11s)  Lock=0.00s (0s)  Rows=1.0 (111332), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 132324  Time=0.00s (13s)  Lock=0.00s (0s)  Rows=1.0 (132324), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM tags WHERE id = 'S'
 
-Count: 104944  Time=0.00s (11s)  Lock=0.00s (0s)  Rows=1.0 (104944), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 119936  Time=0.00s (13s)  Lock=0.00s (0s)  Rows=1.0 (119936), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT IFNULL(SUM(l2.tip), N) FROM livestreams l INNER JOIN livecomments l2 ON l.id = l2.livestream_id WHERE l.id = 'S'
 
-Count: 104944  Time=0.00s (10s)  Lock=0.00s (0s)  Rows=1.0 (104944), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 119936  Time=0.00s (12s)  Lock=0.00s (0s)  Rows=1.0 (119936), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT COUNT(*) FROM livestreams l INNER JOIN reactions r ON l.id = r.livestream_id WHERE l.id = 'S'
 
-Count: 54078  Time=0.00s (7s)  Lock=0.00s (0s)  Rows=1.0 (54078), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 64360  Time=0.00s (9s)  Lock=0.00s (0s)  Rows=1.0 (64360), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM themes WHERE user_id = 'S'
 
-Count: 58074  Time=0.00s (6s)  Lock=0.00s (0s)  Rows=1.0 (58074), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 68346  Time=0.00s (7s)  Lock=0.00s (0s)  Rows=1.0 (68346), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM users WHERE id = 'S'
 
-Count: 31163  Time=0.00s (4s)  Lock=0.00s (0s)  Rows=3.6 (111332), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 37021  Time=0.00s (5s)  Lock=0.00s (0s)  Rows=3.6 (132324), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM livestream_tags WHERE livestream_id = 'S'
 
-Count: 824  Time=0.01s (4s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 927  Time=0.01s (4s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO tags(name) VALUES ('S')
 
-Count: 8  Time=0.49s (3s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 9  Time=0.49s (4s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO ng_words (user_id, livestream_id, word, created_at)
   VALUES
   (N, N, 'S', UNIX_TIMESTAMP()),
@@ -14405,13 +14405,13 @@ Count: 8  Time=0.49s (3s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-
   (N, N, 'S', UNIX_TIMESTAMP()),
   (N, N, 'S', UNIX_TIMESTAMP())
 
-Count: 19856  Time=0.00s (3s)  Lock=0.00s (0s)  Rows=1.0 (19856), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 23037  Time=0.00s (4s)  Lock=0.00s (0s)  Rows=1.0 (23037), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT slot FROM reservation_slots WHERE start_at = 'S' AND end_at = 'S'
 
-Count: 23095  Time=0.00s (2s)  Lock=0.00s (0s)  Rows=1.0 (23095), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 27727  Time=0.00s (3s)  Lock=0.00s (0s)  Rows=1.0 (27727), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM livestreams WHERE id = 'S'
 
-Count: 8  Time=0.34s (2s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 9  Time=0.34s (3s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO livestreams (user_id, title, description, playlist_url, thumbnail_url, start_at, end_at)
   VALUES
   (N, "S", "S", "S", "S", N, N),
@@ -21910,16 +21910,16 @@ Count: 8  Time=0.34s (2s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-
   (N, "S", "S", "S", "S", N, N),
   (N, "S", "S", "S", "S", N, N)
 
-Count: 128  Time=0.02s (2s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  INSERT INTO livestream_tags (id, livestream_id, tag_id) VALUES (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N)
-
-Count: 9804  Time=0.00s (2s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  INSERT INTO livestream_tags (livestream_id, tag_id) VALUES ('S', 'S')
-
-Count: 14737  Time=0.00s (2s)  Lock=0.00s (0s)  Rows=1.0 (14732), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 18805  Time=0.00s (2s)  Lock=0.00s (0s)  Rows=1.0 (18799), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM users WHERE name = 'S'
 
-Count: 8  Time=0.25s (1s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 144  Time=0.02s (2s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  INSERT INTO livestream_tags (id, livestream_id, tag_id) VALUES (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N)
+
+Count: 11376  Time=0.00s (2s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  INSERT INTO livestream_tags (livestream_id, tag_id) VALUES ('S', 'S')
+
+Count: 9  Time=0.25s (2s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO reservation_slots (slot, start_at, end_at)
   VALUES
   (N, N, N),
@@ -30685,28 +30685,34 @@ Count: 8  Time=0.25s (1s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-
 Count: 455  Time=0.00s (1s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO icons (user_id, image) VALUES ('S', 'S')
 
-Count: 28561  Time=0.00s (1s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 35719  Time=0.00s (1s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   BEGIN
 
-Count: 4600  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=5.0 (22788), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 5152  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=4.9 (25442), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT tag_id FROM livestream_tags WHERE livestream_id = 'S'
 
-Count: 40  Time=0.02s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  INSERT INTO livestream_tags (id, livestream_id, tag_id) VALUES (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N)
-
-Count: 4960  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (4960), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 5934  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (5934), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT id, dark_mode FROM themes WHERE user_id = 'S'
 
-Count: 4516  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=5.0 (22580), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 45  Time=0.02s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  INSERT INTO livestream_tags (id, livestream_id, tag_id) VALUES (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N)
+
+Count: 5026  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=5.0 (25130), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM tags WHERE id IN ('S','S','S','S','S')
 
-Count: 2063  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 2393  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO livestreams (user_id, title, description, playlist_url, thumbnail_url, start_at, end_at) VALUES('S', 'S', 'S', 'S', 'S', 'S', 'S')
 
-Count: 1767  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 2248  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO livecomments (user_id, livestream_id, comment, tip, created_at) VALUES ('S', 'S', 'S', 'S', 'S')
 
-Count: 8  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 2275  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  INSERT INTO reactions (user_id, livestream_id, emoji_name, created_at) VALUES ('S', 'S', 'S', 'S')
+
+Count: 9  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  TRUNCATE TABLE ng_words
+
+Count: 9  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO livecomments (user_id, livestream_id, comment, created_at)
   VALUES
   (N, N, 'S', UNIX_TIMESTAMP()),
@@ -31711,37 +31717,34 @@ Count: 8  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-
   (N, N, 'S', UNIX_TIMESTAMP()),
   (N, N, 'S', UNIX_TIMESTAMP())
 
-Count: 8  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  TRUNCATE TABLE livecomments
-
-Count: 8  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  TRUNCATE TABLE ng_words
-
-Count: 8  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  TRUNCATE TABLE livestreams
-
-Count: 8  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  TRUNCATE TABLE livestream_tags
-
-Count: 8  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  TRUNCATE TABLE users
-
-Count: 1787  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  INSERT INTO reactions (user_id, livestream_id, emoji_name, created_at) VALUES ('S', 'S', 'S', 'S')
-
-Count: 1938  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=103.0 (199614), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT * FROM tags
-
-Count: 64  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=1.1 (69), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT * FROM ng_words WHERE livestream_id = 'S'
-
-Count: 1710  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=6.1 (10387), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 2181  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=6.0 (13160), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM livecomments WHERE livestream_id = 'S' ORDER BY created_at DESC
 
-Count: 8  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 9  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  TRUNCATE TABLE livecomments
+
+Count: 9  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  TRUNCATE TABLE livestreams
+
+Count: 9  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  TRUNCATE TABLE livestream_tags
+
+Count: 9  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  TRUNCATE TABLE users
+
+Count: 2254  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=103.0 (232162), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT * FROM tags
+
+Count: 74  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=1.1 (79), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT * FROM ng_words WHERE livestream_id = 'S'
+
+Count: 2254  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.1 (145), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT id, user_id, livestream_id, word FROM ng_words WHERE user_id = 'S' AND livestream_id = 'S'
+
+Count: 9  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   TRUNCATE TABLE reactions
 
-Count: 8  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 9  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO reactions (emoji_name, user_id, livestream_id, created_at)
   VALUES
   ('S', N, N, UNIX_TIMESTAMP()),
@@ -32746,82 +32749,79 @@ Count: 8  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-
   ('S', N, N, UNIX_TIMESTAMP()),
   ('S', N, N, UNIX_TIMESTAMP())
 
-Count: 8  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  TRUNCATE TABLE tags
-
-Count: 8  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 9  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   TRUNCATE TABLE themes
 
-Count: 1772  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.1 (136), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT id, user_id, livestream_id, word FROM ng_words WHERE user_id = 'S' AND livestream_id = 'S'
+Count: 9  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  TRUNCATE TABLE tags
+
+Count: 9  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  TRUNCATE TABLE livestream_viewers_history
+
+Count: 9  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  TRUNCATE TABLE reservation_slots
+
+Count: 9  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  TRUNCATE TABLE icons
+
+Count: 50  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=1033.0 (51650), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT * FROM users
+
+Count: 9  Time=0.03s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  TRUNCATE TABLE livecomment_reports
+
+Count: 110  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=110.8 (12184), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT * FROM livestream_tags WHERE tag_id IN ('S') ORDER BY livestream_id DESC
 
 Count: 1453  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=5.4 (7780), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM reactions WHERE livestream_id = 'S' ORDER BY created_at DESC
 
-Count: 8  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  TRUNCATE TABLE reservation_slots
-
-Count: 8  Time=0.04s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  TRUNCATE TABLE livestream_viewers_history
-
-Count: 8  Time=0.03s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  TRUNCATE TABLE icons
-
-Count: 8  Time=0.03s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  TRUNCATE TABLE livecomment_reports
-
-Count: 92  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=111.0 (10210), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT * FROM livestream_tags WHERE tag_id IN ('S') ORDER BY livestream_id DESC
-
-Count: 40  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=1030.1 (41203), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT * FROM users
-
-Count: 14  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=7496.0 (104944), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 16  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=7496.0 (119936), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM livestreams
 
-Count: 440  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 527  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO users (name, display_name, description, password) VALUES('S', 'S', 'S', 'S')
+
+Count: 79  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1171.8 (92571), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT * FROM livecomments
+
+Count: 9  Time=0.02s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  INSERT INTO livestream_tags (id, livestream_id, tag_id) VALUES (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N)
+
+Count: 944  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=5.4 (5136), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT id, emoji_name, created_at, user_id FROM reactions WHERE livestream_id = 'S' ORDER BY created_at DESC
 
 Count: 455  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   DELETE FROM icons WHERE user_id = 'S'
 
-Count: 8  Time=0.02s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  INSERT INTO livestream_tags (id, livestream_id, tag_id) VALUES (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N), (N, N, N)
-
-Count: 69  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1167.1 (80529), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT * FROM livecomments
-
-Count: 438  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=5.5 (2408), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT id, emoji_name, created_at, user_id FROM reactions WHERE livestream_id = 'S' ORDER BY created_at DESC
-
-Count: 428  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  INSERT INTO themes (user_id, dark_mode) VALUES('S', TRUE)
-
-Count: 569  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (569), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT COUNT(*) FROM livestream_viewers_history WHERE livestream_id = 'S'
-
-Count: 569  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.1 (606), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT * FROM livecomments WHERE livestream_id = 'S'
-
-Count: 356  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=2.0 (712), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 774  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=2.0 (1548), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM users WHERE id IN ('S','S')
 
-Count: 496  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (483), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 782  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (782), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT COUNT(*) FROM livestream_viewers_history WHERE livestream_id = 'S'
+
+Count: 782  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.2 (918), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT * FROM livecomments WHERE livestream_id = 'S'
+
+Count: 513  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  INSERT INTO themes (user_id, dark_mode) VALUES('S', TRUE)
+
+Count: 593  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (580), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM livecomments WHERE id = 'S'
 
-Count: 169  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=50.0 (8450), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 204  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=50.0 (10200), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM livestreams ORDER BY id DESC LIMIT N
 
-Count: 222  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=7.3 (1631), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 275  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=7.7 (2108), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM livestreams WHERE user_id = 'S'
 
-Count: 218  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 264  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO livecomment_reports(user_id, livestream_id, livecomment_id, created_at) VALUES ('S', 'S', 'S', 'S')
 
-Count: 183  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 232  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO livestream_viewers_history (user_id, livestream_id, created_at) VALUES('S', 'S', 'S')
 
-Count: 40  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.8 (30), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 50  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.8 (38), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT r.emoji_name
   FROM users u
   INNER JOIN livestreams l ON l.user_id = u.id
@@ -32831,11 +32831,23 @@ Count: 40  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.8 (30), isucon[isucon]@ec2-1
   ORDER BY COUNT(*) DESC, emoji_name DESC
   LIMIT N
 
-Count: 140  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 182  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   DELETE FROM livestream_viewers_history WHERE user_id = 'S' AND livestream_id = 'S'
 
-Count: 174  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.2 (27), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 222  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.2 (42), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM livecomments WHERE livestream_id = 'S' ORDER BY created_at DESC LIMIT N
+
+Count: 50  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (50), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT COUNT(*) FROM users u
+  INNER JOIN livestreams l ON l.user_id = u.id
+  INNER JOIN reactions r ON r.livestream_id = l.id
+  WHERE u.name = 'S'
+
+Count: 210  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.2 (52), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT * FROM livecomment_reports WHERE livestream_id = 'S'
+
+Count: 139  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (2), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT * FROM ng_words WHERE user_id = 'S' AND livestream_id = 'S' ORDER BY created_at DESC
 
 Count: 136  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (136), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT COUNT(*)
@@ -32845,73 +32857,61 @@ Count: 136  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (136), isucon[isucon]@ec2
   (SELECT CONCAT('S', 'S', 'S')	AS pattern) AS patterns
   ON texts.text LIKE patterns.pattern
 
-Count: 174  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.3 (47), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT * FROM livecomment_reports WHERE livestream_id = 'S'
-
-Count: 40  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (40), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT COUNT(*) FROM users u
-  INNER JOIN livestreams l ON l.user_id = u.id
-  INNER JOIN reactions r ON r.livestream_id = l.id
-  WHERE u.name = 'S'
-
-Count: 116  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (2), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT * FROM ng_words WHERE user_id = 'S' AND livestream_id = 'S' ORDER BY created_at DESC
+Count: 252  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (252), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT * FROM users WHERE id IN ('S')
 
 Count: 129  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.1 (12), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM reactions WHERE livestream_id = 'S' ORDER BY created_at DESC LIMIT N
 
-Count: 51  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 57  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   ROLLBACK
 
-Count: 64  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 74  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   INSERT INTO ng_words(user_id, livestream_id, word, created_at) VALUES ('S', 'S', 'S', 'S')
 
-Count: 120  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (120), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT * FROM users WHERE id IN ('S')
+Count: 86  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.1 (6), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT id, emoji_name, created_at, user_id FROM reactions WHERE livestream_id = 'S' ORDER BY created_at DESC LIMIT N
 
-Count: 92  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (92), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 110  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (110), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT id FROM tags WHERE name = 'S'
 
-Count: 64  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (64), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT * FROM livestreams WHERE id = 'S' AND user_id = 'S'
-
-Count: 76  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=2.0 (152), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 114  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=2.0 (228), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM tags WHERE id IN ('S','S')
 
-Count: 73  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (73), 2users@2hosts
+Count: 74  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (74), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT * FROM livestreams WHERE id = 'S' AND user_id = 'S'
+
+Count: 82  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (82), 2users@2hosts
   select @@version_comment limit N
 
-Count: 40  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.1 (3), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT id, emoji_name, created_at, user_id FROM reactions WHERE livestream_id = 'S' ORDER BY created_at DESC LIMIT N
+Count: 42  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (42), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT id FROM users WHERE name = 'S'
 
 Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=6.0 (12), root[root]@localhost
   show databases
 
-Count: 33  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (33), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT id FROM users WHERE name = 'S'
+Count: 9  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (9), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT IFNULL(SUM(tip), N) FROM livecomments
 
-Count: 122  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (1), 3users@2hosts
+Count: 137  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (1), 3users@2hosts
   #
 
-Count: 8  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (8), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT IFNULL(SUM(tip), N) FROM livecomments
+Count: 16  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (16), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT COUNT(*) FROM livestreams l INNER JOIN livestream_viewers_history h ON h.livestream_id = l.id WHERE l.id = 'S'
 
 Count: 3  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=12.0 (36), root[root]@localhost
   show tables
 
-Count: 14  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (14), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT COUNT(*) FROM livestreams l INNER JOIN livestream_viewers_history h ON h.livestream_id = l.id WHERE l.id = 'S'
-
 Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=3.0 (6), root[root]@localhost
   describe icons
 
-Count: 14  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (14), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 16  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (16), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT IFNULL(MAX(tip), N) FROM livestreams l INNER JOIN livecomments l2 ON l2.livestream_id = l.id WHERE l.id = 'S'
 
-Count: 14  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (14), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 16  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (16), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT COUNT(*) FROM livestreams l INNER JOIN livecomment_reports r ON r.livestream_id = l.id WHERE l.id = 'S'
 
-Count: 14  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (14), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 16  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (16), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT COUNT(*) FROM livestreams l INNER JOIN reactions r ON r.livestream_id = l.id WHERE l.id = 'S'
 
 Count: 4  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
@@ -32920,25 +32920,25 @@ Count: 4  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localho
 Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=5.5 (11), root[root]@localhost
   select * from icons limit N
 
+Count: 8  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  INSERT INTO themes (user_id, dark_mode) VALUES('S', FALSE)
+
 Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=3.0 (3), root[root]@localhost
   describe themes
-
-Count: 7  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  INSERT INTO themes (user_id, dark_mode) VALUES('S', FALSE)
 
 Count: 24  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
 
 
-Count: 4  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=11.0 (44), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+Count: 6  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=11.0 (66), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM tags WHERE id IN ('S','S','S','S','S','S','S','S','S','S','S')
 
 Count: 4  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=3.0 (12), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
-  SELECT * FROM tags WHERE id IN ('S','S','S')
-
-Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=3.0 (6), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
   SELECT * FROM users WHERE id IN ('S','S','S')
 
-Count: 4  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
+Count: 6  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=3.0 (18), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
+  SELECT * FROM tags WHERE id IN ('S','S','S')
+
+Count: 5  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isudns[isudns]@localhost
   SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED
 
 Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-230-219-103.ap-northeast-1.compute.amazonaws.com
@@ -32947,18 +32947,18 @@ Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), isucon[isucon]@ec2-13-
 Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (1), root[root]@localhost
   SELECT DATABASE()
 
-Count: 107  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
-  administrator command: Quit
-
 Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
   administrator command: Prepare
 
-Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
-  administrator command: Init DB
-
-Count: 9  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
-  administrator command: Ping
+Count: 121  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Quit
 
 Count: 4  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
   administrator command: Reset stmt
+
+Count: 10  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Ping
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Init DB
 
