@@ -44,9 +44,6 @@ module Isupipe
 
     after do
       StackProf.stop
-    end
-
-    at_exit do
       StackProf.results('../measure/stackprof.dump')
     end
 
