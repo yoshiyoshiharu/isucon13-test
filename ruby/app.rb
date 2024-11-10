@@ -13,11 +13,11 @@ require 'stackprof'
 
 module Isupipe
   class App < Sinatra::Base
-   use StackProf::Middleware, enabled: true,
-                              mode: :cpu,
-                              interval: 1000,
-                              raw: true,
-                              save_every: 5
+    use StackProf::Middleware, enabled: true,
+                               mode: :cpu,
+                               interval: 1000,
+                               raw: true,
+                               save_every: 5
     enable :logging
     set :show_exceptions, :after_handler
     set :sessions, domain: 'u.isucon.local', path: '/', expire_after: 1000*60
@@ -37,20 +37,6 @@ module Isupipe
         super(message || "HTTP error #{code}")
         @code = code
       end
-    end
-
-    before do
-      StackProf.start(
-       mode: :cpu,
-       interval: 1000,
-       raw: true,
-       save_every: 5
-      )
-    end
-
-    after do
-      StackProf.stop
-      StackProf.results('../measure/stackprof.dump')
     end
 
     error HttpError do
