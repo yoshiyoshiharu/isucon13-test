@@ -36,7 +36,7 @@ module Isupipe
 
     def profile_file_name
       endpoint_name = request.path_info.split('/').reject(&:empty?).first || "root"
-      "tmp/stackprof_#{endpoint_name}.dump"
+      "../measure/ruby/stackprof_#{endpoint_name}.dump"
     end
 
     # beforeとafterフィルタでプロファイリングをエンドポイントごとに適用
