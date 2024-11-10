@@ -47,7 +47,7 @@ module Isupipe
     end
 
     at_exit do
-      StackProf.results('../measure/stackprof.dump') if StackProf.running?
+      StackProf.results('../measure/stackprof.dump')
     end
 
     error HttpError do
