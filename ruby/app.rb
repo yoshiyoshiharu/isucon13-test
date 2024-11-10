@@ -9,6 +9,7 @@ require 'open3'
 require 'securerandom'
 require 'sinatra/base'
 require 'sinatra/json'
+require 'stackprof'
 
 module Isupipe
   class App < Sinatra::Base
@@ -31,6 +32,21 @@ module Isupipe
         super(message || "HTTP error #{code}")
         @code = code
       end
+    end
+
+    def profile_request
+      StackProf.run(mode: :cpu, out: "tmp/stackprof_#{request.path_info.tr('/', '_')}.dump") do
+        yield
+      end
+    end
+
+    before do
+      @profile_result = profile_request { } # プロファイリング開始
+    end
+
+    # afterでプロファイリングを終了
+    after do
+      profile_request {} # プロファイリングの終了とファイル保存
     end
 
     error HttpError do
