@@ -35,5 +35,5 @@ echo "Nginxのログフォーマット完了"
 
 
 # mysql
-ssh 52.195.229.16 sudo mysqldumpslow -s t /var/log/mysql/mysql-slow.log > ${APP_HOME}/measure/mysql/mysql-slow.log
+ssh 57.180.240.214 sudo mysqldumpslow -s t /var/log/mysql/mysql-slow.log > ${APP_HOME}/measure/mysql/mysql-slow.log
 echo "Mysqlのスロークエリ出力完了"
