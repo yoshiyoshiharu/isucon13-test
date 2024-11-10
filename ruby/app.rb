@@ -34,12 +34,18 @@ module Isupipe
       end
     end
     before do
-      StackProf.start
+      StackProf.start(
+       enabled: true,
+       mode: :cpu,
+       raw: true,
+       interval: 1000,
+       save_every: 5
+      )
     end
 
     after do
       StackProf.stop
-      StackProf.results("stackprof-#{@endpoint_name}.dump")
+      StackProf.results("../measure/ruby/stackprof-#{@endpoint_name}.dump")
     end
 
     error HttpError do
