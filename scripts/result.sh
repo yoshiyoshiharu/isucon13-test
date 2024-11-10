@@ -34,9 +34,11 @@ sudo alp ltsv --file=${NGINX_ACCESS_LOG} --nosave-pos --pos /tmp/alp.pos --sort 
 echo "Nginxのログフォーマット完了"
 
 
+# ruby
+stackprof --d3-flamegraph ${APP_HOME}/measure/ruby/stackprof.dump > ${APP_HOME}/measure/ruby/flamegraph.html
+echo "stackprofのhtmlへの変換完了"
+
 # mysql
 ssh 57.180.240.214 sudo mysqldumpslow -s t /var/log/mysql/mysql-slow.log > ${APP_HOME}/measure/mysql/mysql-slow.log
 echo "Mysqlのスロークエリ出力完了"
 
-# ruby
-sudo stackprof --d3-flamegraph ${APP_HOME}/measure/ruby/stackprof.dump > ${APP_HOME}/measure/ruby/flamegraph.html
