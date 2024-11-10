@@ -34,6 +34,22 @@ module Isupipe
       end
     end
 
+    def profile_request
+      StackProf.run(mode: :cpu, out: "../measure/ruby/stackprof_#{request.path_info.tr('/', '_')}.dump") do
+        yield
+      end
+    end
+
+    # beforeとafterフィルタでプロファイリングをすべてのエンドポイントに適用
+    before do
+      @profile_result = profile_request { } # プロファイリング開始
+    end
+
+    # afterでプロファイリングを終了
+    after do
+      profile_request {} # プロファイリングの終了とファイル保存
+    end
+
     error HttpError do
       e = env['sinatra.error']
       status e.code
