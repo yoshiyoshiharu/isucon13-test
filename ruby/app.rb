@@ -9,6 +9,7 @@ require 'open3'
 require 'securerandom'
 require 'sinatra/base'
 require 'sinatra/json'
+require 'stackprof'
 
 module Isupipe
   class App < Sinatra::Base
@@ -31,6 +32,20 @@ module Isupipe
         super(message || "HTTP error #{code}")
         @code = code
       end
+    end
+    before do
+      StackProf.start(
+       enabled: true,
+       mode: :cpu,
+       raw: true,
+       interval: 1000,
+       save_every: 5
+      )
+    end
+
+    after do
+      StackProf.stop
+      StackProf.results("../measure/ruby/stackprof.dump")
     end
 
     error HttpError do
@@ -353,7 +368,6 @@ module Isupipe
     end
 
     # livestream
-
     ReserveLivestreamRequest = Data.define(
       :tags,
       :title,
