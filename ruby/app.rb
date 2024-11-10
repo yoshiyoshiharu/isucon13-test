@@ -34,20 +34,20 @@ module Isupipe
       end
     end
 
-    def profile_request
-      StackProf.run(mode: :cpu, out: "../measure/ruby/stackprof_#{request.path_info.tr('/', '_')}.dump") do
-        yield
-      end
+    def profile_file_name
+      endpoint_name = request.path_info.split('/').reject(&:empty?).first || "root"
+      "tmp/stackprof_#{endpoint_name}.dump"
     end
 
-    # beforeとafterフィルタでプロファイリングをすべてのエンドポイントに適用
+    # beforeとafterフィルタでプロファイリングをエンドポイントごとに適用
     before do
-      @profile_result = profile_request { } # プロファイリング開始
+      StackProf.start
     end
 
-    # afterでプロファイリングを終了
     after do
-      profile_request {} # プロファイリングの終了とファイル保存
+      StackProf.stop
+      # エンドポイントごとに同じファイル名で保存
+      StackProf.results(profile_file_name)
     end
 
     error HttpError do
