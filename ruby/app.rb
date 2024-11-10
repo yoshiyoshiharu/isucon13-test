@@ -13,6 +13,10 @@ require 'stackprof'
 
 module Isupipe
   class App < Sinatra::Base
+   use StackProf::Middleware, enabled: true,
+                             mode: :cpu,
+                             interval: 1000,
+                             save_every: 5
     enable :logging
     set :show_exceptions, :after_handler
     set :sessions, domain: 'u.isucon.local', path: '/', expire_after: 1000*60
