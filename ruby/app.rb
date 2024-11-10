@@ -45,7 +45,7 @@ module Isupipe
 
     after do
       StackProf.stop
-      StackProf.results("../measure/ruby/stackprof-#{@endpoint_name}.dump")
+      StackProf.results("../measure/ruby/stackprof.dump")
     end
 
     error HttpError do
@@ -329,7 +329,6 @@ module Isupipe
 
     # 初期化
     post '/api/initialize' do
-      @endpoint_name = 'post-initialize'
       out, status = Open3.capture2e('../sql/init.sh')
       unless status.success?
         logger.warn("init.sh failed with out=#{out}")
@@ -343,8 +342,6 @@ module Isupipe
 
     # top
     get '/api/tag' do
-      @endpoint_name = 'get-tag'
-
       json(
         tags: tag_master,
       )
@@ -352,7 +349,6 @@ module Isupipe
 
     # 配信者のテーマ取得API
     get '/api/user/:username/theme' do
-      @endpoint_name = 'get-theme'
       verify_user_session!
 
       username = params[:username]
@@ -384,7 +380,6 @@ module Isupipe
 
     # reserve livestream
     post '/api/livestream/reservation' do
-      @endpoint_name = 'post-livestream-reservation'
       verify_user_session!
       sess = session[DEFAULT_SESSION_ID_KEY]
       unless sess
@@ -810,7 +805,6 @@ module Isupipe
     end
 
     get '/api/livestream/:livestream_id/reaction' do
-      @endpoint_name = 'get-livestream-livestream_id-reaction'
       verify_user_session!
 
       livestream_id = cast_as_integer(params[:livestream_id])
