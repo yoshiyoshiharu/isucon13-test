@@ -962,7 +962,7 @@ module Isupipe
       FileUtils.mkdir_p("/home/isucon/webapp/img/#{user_name}/")
       File.binwrite("/home/isucon/webapp/img/#{user_name}/icon.jpg", image)
 
-      icon_id = rand(10000000);
+      icon_id = user_id
 
       status 201
       json(
