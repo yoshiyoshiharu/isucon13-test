@@ -34,19 +34,20 @@ module Isupipe
       end
     end
 
-    def profile_request
-      StackProf.run(mode: :cpu, out: "tmp/stackprof_#{request.path_info.tr('/', '_')}.dump") do
-        yield
-      end
+    configure do
+      StackProf.start(mode: :cpu)
     end
 
     before do
-      @profile_result = profile_request { } # プロファイリング開始
+      StackProf.start
     end
 
-    # afterでプロファイリングを終了
     after do
-      profile_request {} # プロファイリングの終了とファイル保存
+      StackProf.stop
+    end
+
+    at_exit do
+      StackProf.results('../measure/stackprof.dump') if StackProf.running?
     end
 
     error HttpError do
