@@ -17,7 +17,7 @@ sudo truncate -s 0 "${app_prof}"
 
 # サービスの再起動
 sudo systemctl restart nginx
-ssh 57.180.240.214 sudo systemctl restart mysql
+sudo systemctl restart mysql
 sudo systemctl restart "${systemctl_app}"
 
 echo "MySQLとNginxのログクリアおよびサービスの再起動が完了しました"
