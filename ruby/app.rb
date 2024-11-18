@@ -173,7 +173,7 @@ module Isupipe
       def fill_user_response(tx, user_model)
         theme_model = tx.xquery('SELECT * FROM themes WHERE user_id = ?', user_model.fetch(:id)).first
 
-        icon_path = "../img/#{user_model.fetch(:id)}.jpg"
+        icon_path = "../img/#{user_model.fetch(:name)}/icon.jpg"
         image = if File.exist?(icon_path)
           File.binread(icon_path)
         else
@@ -845,7 +845,7 @@ module Isupipe
     def api_livestream_livestream_id_reaction_fill_user_response(tx, user_model)
       theme_model = tx.xquery('SELECT id, dark_mode FROM themes WHERE user_id = ?', user_model.fetch(:id)).first
 
-      icon_path = "../img/#{user_model.fetch(:id)}.jpg"
+      icon_path = "../img/#{user_model.fetch(:name)}/icon.jpg"
       image = if File.exist?(icon_path)
           File.binread(icon_path)
         else
@@ -926,28 +926,34 @@ module Isupipe
 
     get '/api/user/:username/icon' do
       username = params[:username]
-
-      image = db_transaction do |tx|
-        user = tx.xquery('SELECT * FROM users WHERE name = ?', username).first
-        unless user
-          raise HttpError.new(404, 'not found user that has the given username')
-        end
-        icon_path = "../img/#{user.fetch(:id)}.jpg"
-        image =
-          if File.exist?(icon_path)
-            icon_path
-          else
-            nil
-          end
+      user = db_conn.xquery('SELECT * FROM users WHERE name = ? LIMIT 1', username).first
+      unless user
+        raise HttpError.new(404, 'not found user that has the given username')
       end
-
-      content_type 'image/jpeg'
-      if image
-        # image[:image]
-        send_file image
-      else
-        send_file FALLBACK_IMAGE
-      end
+      send_file FALLBACK_IMAGE
+      # username = params[:username]
+      #
+      # user = db_transaction do |tx|
+      #   tx.xquery('SELECT * FROM users WHERE name = ?', username).first
+      # end
+      # unless user
+      #   raise HttpError.new(404, 'not found user that has the given username')
+      # end
+      #
+      # icon_url = "../img/#{user.fetch(:name)}/icon.jpg"
+      # image =
+      #     if File.exist?(icon_url)
+      #       icon_url
+      #     else
+      #       nil
+      #     end
+      #
+      # content_type 'image/jpeg'
+      # if image
+      #   send_file image
+      # else
+      #   send_file FALLBACK_IMAGE
+      # end
     end
 
     PostIconRequest = Data.define(:image)
@@ -966,11 +972,11 @@ module Isupipe
 
       req = decode_request_body(PostIconRequest)
       image = Base64.decode64(req.image)
-      File.open("../img/#{user_id}.jpg", mode="w") do |f|
-        f.write(image)
-      end
+      user_name = db_transaction { |tx| tx.xquery('SELECT * FROM users WHERE id = ?', user_id).first[:name] }
+      FileUtils.mkdir_p("/home/isucon/webapp/img/#{user_name}/")
+      File.binwrite("/home/isucon/webapp/img/#{user_name}/icon.jpg", image)
 
-      icon_id = rand(10000000);
+      icon_id = user_id
 
       status 201
       json(
